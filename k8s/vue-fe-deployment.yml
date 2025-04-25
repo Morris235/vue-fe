@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vue-fe-deployment
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate # 롤아웃 전략
+  selector:
+    matchLabels:
+      app: vue
+  template:
+    metadata:
+      labels:
+        app: vue
+    spec:
+      containers:
+        - name: vue-container
+          image: morris235/vue-fe:latest # Docker Hub 이미지 사용
+          ports:
+            - containerPort: 80 # Nginx가 노출하는 기본 포트
